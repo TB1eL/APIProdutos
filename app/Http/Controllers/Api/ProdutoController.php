@@ -18,9 +18,12 @@ class ProdutoController extends Controller
      */
     public function index(Request $request)
     {
-        $filtros = [
-            'search' => $request->query('search'),
-        ];
+       $filtros = [
+    'search' => $request->query('search'),
+    'preco_min' => $request->query('preco_min'),
+    'preco_max' => $request->query('preco_max'),
+    'em_estoque' => $request->boolean('em_estoque'),
+];
 
         return ProdutoResource::collection($this->service->listar($filtros));
     }
