@@ -17,6 +17,21 @@ class ProdutoService
         return $this->produtos->create($dados);
     }
 
+    public function update(Produto $produto, array $dados)
+    {
+        $preco = $dados['preco'] ?? $produto->preco;
+        $custo = $dados['preco_custo'] ?? $produto->preco_custo;
+
+        $this->verificarMargem($preco, $custo);
+
+        return $this->produtos->update($produto, $dados);
+    }
+
+    public function delete(Produto $produto): void
+    {
+        $this->produtos->delete($produto);
+    }
+
     public function listar(array $filtros)
     {
         return $this->produtos->search($filtros);

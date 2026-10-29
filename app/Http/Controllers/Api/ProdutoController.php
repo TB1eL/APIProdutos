@@ -69,7 +69,7 @@ class ProdutoController extends Controller
             'quantidade' => 'sometimes|integer|min:0',
         ]);
 
-        $produto->update($dados);
+        $produto = $this->service->update($produto, $dados);
 
         return new ProdutoResource($produto);
     }
@@ -77,8 +77,10 @@ class ProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
-    }
+    public function destroy(Produto $produto)
+{
+    $this->service->delete($produto);
+
+    return response()->noContent();
+}
 }
